@@ -19,20 +19,25 @@ interface FilterProps {
 
 interface ResultsProps {
     filter: FilterProps
-    walletAddress?: string
+    userId?: string
 }
 
 const SORT_COLUMN_MAP: Record<number, string> = {
     1: 'total_durations',
     2: 'total_amount',
     3: 'counts.normal',
+    4: 'durations.normal',
     5: 'counts.sleep',
+    6: 'durations.sleep',
     7: 'counts.rest',
+    8: 'durations.rest',
     9: 'counts.posture',
-    11: 'counts.exercise'
+    10: 'durations.posture',
+    11: 'counts.exercise',
+    12: 'durations.exercise'
 }
 
-const Results: React.FC<ResultsProps> = ({ filter, walletAddress }) => {
+const Results: React.FC<ResultsProps> = ({ filter, userId }) => {
     const {
         recordingType,
         gender,
@@ -109,8 +114,8 @@ const Results: React.FC<ResultsProps> = ({ filter, walletAddress }) => {
 
     const rows: React.ReactNode[][] = rowsData.map((e: any, i: number) => {
         const isCurrentUser =
-            walletAddress &&
-            (e.public_address === walletAddress || e.id === walletAddress)
+            userId &&
+            (e.id === userId)
 
         const textClass = isCurrentUser
             ? 'text-reflex-teal font-medium'
@@ -119,7 +124,7 @@ const Results: React.FC<ResultsProps> = ({ filter, walletAddress }) => {
         return [
             <div key={`user-${i}`} className={`text-sm ${textClass}`}>
                 {isCurrentUser && '👤 '}
-                {e.public_address}
+                {e.id}
             </div>,
             <div
                 key={`dur-${i}`}

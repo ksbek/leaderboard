@@ -28,14 +28,14 @@ function Table({
                 }
             )}
             onClick={() => {
-                if (onSort && ([1, 2, 3, 5, 7, 9, 11].includes(i))) {
+                if (onSort) {
                     onSort(i)
                 }
             }}
         >
             <div className="flex items-center gap-2">
                 {e}
-                {onSort && ([1, 2, 3, 5, 7, 9, 11].includes(i)) && (
+                {onSort && (
                     <span className="text-gray-400">
                         {sortColumn === i ? (
                             sortDirection === 'ascending' ? '▲' : '▼'

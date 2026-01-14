@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Results from './components/Results'
 
 function App() {
-    const [walletAddress, setWalletAddress] = useState<string>('')
+    const [userId, setUserId] = useState<string>('')
     const [filter] = useState({
         recordingType: '',
         gender: '',
@@ -16,11 +16,11 @@ function App() {
     })
 
     useEffect(() => {
-        // Get wallet_address from URL query params
+        // Get user_id from URL query params
         const params = new URLSearchParams(window.location.search)
-        const wallet = params.get('wallet_address')
-        if (wallet) {
-            setWalletAddress(wallet)
+        const user = params.get('user_id')
+        if (user) {
+            setUserId(user)
         }
     }, [])
 
@@ -30,13 +30,13 @@ function App() {
                 <div className="mb-8">
                     <h1 className="mb-2 text-4xl font-bold text-white">🏆 Leaderboard</h1>
                     <p className="text-gray-400">Rankings based on user recording activity</p>
-                    {walletAddress && (
+                    {userId && (
                         <p className="mt-2 text-sm text-reflex-teal">
-                            Viewing as: {walletAddress}
+                            Viewing as: {userId}
                         </p>
                     )}
                 </div>
-                <Results filter={filter} walletAddress={walletAddress} />
+                <Results filter={filter} userId={userId} />
             </div>
         </div>
     )
